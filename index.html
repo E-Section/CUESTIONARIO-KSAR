@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .registration-form, .quiz-form {
+            margin-bottom: 30px;
+        }
+        .registration-form label, .registration-form input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .registration-form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Espacio para el botón */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result-message {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #c3e6cb; /* Color verde claro */
+            background-color: #d4edda; /* Color verde más claro */
+            color: #155724; /* Color de texto verde oscuro */
+            border-radius: 5px;
+            text-align: center;
+            display: none; /* Se mostrará con JavaScript */
+        }
+        .result-message a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .result-message a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cuestionario de Prueba</h1>
+
+        <form id="registrationForm" class="registration-form">
+            <h2>Registro del Participante</h2>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <button type="submit">Iniciar Cuestionario</button>
+        </form>
+
+        <form id="quizForm" class="quiz-form" style="display: none;">
+            <div class="question">
+                <p>1. ¿Cuál es la capital de Francia?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q1" value="a"> Londres
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="b"> Berlín
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="c"> París
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="d"> Madrid
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>2. ¿En qué año llegó Cristóbal Colón a América?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q2" value="a"> 1492
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="b"> 1500
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="c"> 1450
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="d"> 1600
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>3. ¿Qué planeta es conocido como el "Planeta Rojo"?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q3" value="a"> Júpiter
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="b"> Marte
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="c"> Venus
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="d"> Saturno
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>4. ¿Cuál es el río más largo del mundo?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q4" value="a"> Nilo
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="b"> Amazonas
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="c"> Yangtsé
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="d"> Misisipi
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>5. ¿Quién escribió "Don Quijote de la Mancha"?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q5" value="a"> Gabriel García Márquez
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value="b"> Miguel de Cervantes
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value="c"> Federico García Lorca
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value="d"> Jorge Luis Borges
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>6. ¿Cuál es el elemento químico más abundante en la Tierra?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q6" value="a"> Hidrógeno
+                    </label>
+                    <label>
+                        <input type="radio" name="q6" value="b"> Oxígeno
+                    </label>
+                    <label>
+                        <input type="radio" name="q6" value="c"> Silicio
+                    </label>
+                    <label>
+                        <input type="radio" name="q6" value="d"> Hierro
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>7. ¿Cuántos huesos tiene el cuerpo humano adulto?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q7" value="a"> 206
+                    </label>
+                    <label>
+                        <input type="radio" name="q7" value="b"> 210
+                    </label>
+                    <label>
+                        <input type="radio" name="q7" value="c"> 198
+                    </label>
+                    <label>
+                        <input type="radio" name="q7" value="d"> 200
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>8. ¿Quién pintó la "Mona Lisa"?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q8" value="a"> Vincent van Gogh
+                    </label>
+                    <label>
+                        <input type="radio" name="q8" value="b"> Pablo Picasso
+                    </label>
+                    <label>
+                        <input type="radio" name="q8" value="c"> Leonardo da Vinci
+                    </label>
+                    <label>
+                        <input type="radio" name="q8" value="d"> Claude Monet
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>9. ¿Cuál es el océano más grande del mundo?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q9" value="a"> Atlántico
+                    </label>
+                    <label>
+                        <input type="radio" name="q9" value="b"> Índico
+                    </label>
+                    <label>
+                        <input type="radio" name="q9" value="c"> Ártico
+                    </label>
+                    <label>
+                        <input type="radio" name="q9" value="d"> Pacífico
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>10. ¿Cuál es la montaña más alta del mundo?</p>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="q10" value="a"> K2
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="b"> Monte Everest
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="c"> Kangchenjunga
+                    </label>
+                    <label>
+                        <input type="radio" name="q10" value="d"> Lhotse
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Finalizar Cuestionario</button>
+        </form>
+
+        <div id="resultMessage" class="result-message"></div>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById('registrationForm');
+        const quizForm = document.getElementById('quizForm');
+        const resultMessageDiv = document.getElementById('resultMessage');
+
+        let userName = '';
+        let userLastName = '';
+
+        // Respuestas correctas (solo para la evaluación interna y el archivo de texto)
+        const correctAnswers = {
+            q1: 'c', // París
+            q2: 'a', // 1492
+            q3: 'b', // Marte
+            q4: 'b', // Amazonas
+            q5: 'b', // Miguel de Cervantes
+            q6: 'b', // Oxígeno
+            q7: 'a', // 206
+            q8: 'c', // Leonardo da Vinci
+            q9: 'd', // Pacífico
+            q10: 'b' // Monte Everest
+        };
+
+        // Event listener para el formulario de registro
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario de registro se envíe
+
+            userName = document.getElementById('nombre').value.trim(); // .trim() para eliminar espacios en blanco
+            userLastName = document.getElementById('apellido').value.trim();
+
+            if (userName === '' || userLastName === '') {
+                alert('Por favor, ingresa tu nombre y apellido para iniciar el cuestionario.');
+                return; // Detiene la ejecución si los campos están vacíos
+            }
+
+            // Oculta el formulario de registro y muestra el cuestionario
+            registrationForm.style.display = 'none';
+            quizForm.style.display = 'block';
+        });
+
+        // Event listener para el formulario del cuestionario
+        quizForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario del cuestionario se envíe
+
+            let score = 0;
+            let resultsText = `Resultados del Cuestionario\n\n`;
+            resultsText += `Participante: ${userName} ${userLastName}\n\n`;
+
+            for (let i = 1; i <= 10; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                // Para obtener el texto de la pregunta dinámicamente
+                const questionElement = document.querySelector(`#quizForm .question:nth-child(${i}) p`);
+                const questionText = questionElement ? questionElement.textContent.trim() : `Pregunta ${i}`;
+
+                resultsText += `${questionText}\n`;
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.value;
+                    const correctAnswer = correctAnswers[questionName];
+                    const selectedOptionText = selectedOption.parentNode.textContent.trim(); // Texto de la opción seleccionada
+
+                    resultsText += ` Tu respuesta: ${selectedOptionText}\n`;
+
+                    if (userAnswer === correctAnswer) {
+                        score++;
+                        resultsText += ` Estado: Correcta\n`;
+                    } else {
+                        resultsText += ` Estado: Incorrecta\n`;
+                    }
+                    // Obtiene el texto de la respuesta correcta para el evaluador
+                    const correctOptionElement = document.querySelector(`input[name="${questionName}"][value="${correctAnswer}"]`);
+                    const correctOptionText = correctOptionElement ? correctOptionElement.parentNode.textContent.trim() : 'N/A';
+                    resultsText += ` Respuesta correcta: ${correctOptionText}\n`;
+                } else {
+                    resultsText += ` Tu respuesta: No respondida\n`;
+                    resultsText += ` Estado: No respondida\n`;
+                    // Si no se respondió, igual se muestra cuál era la correcta para el evaluador
+                    const correctAnswer = correctAnswers[questionName];
+                    const correctOptionElement = document.querySelector(`input[name="${questionName}"][value="${correctAnswer}"]`);
+                    const correctOptionText = correctOptionElement ? correctOptionElement.parentNode.textContent.trim() : 'N/A';
+                    resultsText += ` Respuesta correcta: ${correctOptionText}\n`;
+                }
+                resultsText += `\n`; // Salto de línea para separar las preguntas en el archivo
+            }
+
+            resultsText += `Puntuación total de ${userName} ${userLastName}: ${score} de 10\n`;
+
+            // --- Generar y descargar el archivo TXT ---
+            const filename = `Cuestionario_${userName}_${userLastName}.txt`.replace(/ /g, '_'); // Reemplaza espacios por guiones bajos para el nombre del archivo
+            const blob = new Blob([resultsText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.style.display = 'none'; // Ocultar el enlace
+            document.body.appendChild(a);
+            a.click(); // Simular un clic para iniciar la descarga
+            document.body.removeChild(a); // Eliminar el enlace
+            URL.revokeObjectURL(url); // Liberar la URL del objeto
+
+            // --- Mostrar mensaje al usuario ---
+            quizForm.style.display = 'none'; // Oculta el cuestionario una vez enviado
+
+            resultMessageDiv.innerHTML = `
+                <p>¡Cuestionario completado, ${userName}!</p>
+                <p>El archivo de tus resultados (<strong>${filename}</strong>) ha sido descargado en tu dispositivo.</p>
+                <p>Por favor, adjunta este archivo a un correo electrónico y envíalo a la dirección de evaluación. ¡Gracias!</p>
+                <p>Puedes <a href="mailto:tu_correo_de_evaluador@example.com?subject=Resultados Cuestionario ${userName} ${userLastName}&body=Adjunto mis resultados del cuestionario.">hacer clic aquí para abrir tu correo</a> y adjuntar el archivo.</p>
+            `;
+            resultMessageDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
